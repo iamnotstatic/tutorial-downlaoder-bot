@@ -1,6 +1,7 @@
 const express = require('express');
 const scrapper = require('./scrapper/scrapper');
 require('./db/mongoose');
+require('./bot/bot');
 
 const app = express();
 
