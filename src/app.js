@@ -1,5 +1,6 @@
 const express = require('express');
 const scrapper = require('./scrapper/scrapper');
+const packageInfo = require('../package.json');
 require('./db/mongoose');
 require('./bot/bot');
 
@@ -8,6 +9,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // API route
+
+app.get('/', function (req, res) {
+  res.json({
+    message: 'Welcome to Tutorial Downloader Bot',
+    link: 'https://t.me/tuthive_bot',
+    version: packageInfo.version,
+  });
+});
 
 app.get('/api/search', (req, res) => {
   scrapper

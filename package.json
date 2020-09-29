@@ -4,8 +4,7 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "src/app.js",
+    "start": "node src/app.js",
     "dev": "env-cmd -f ./config/dev.env nodemon src/app.js"
   },
   "keywords": [],
