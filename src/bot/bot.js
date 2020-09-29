@@ -28,7 +28,7 @@ bot.onText(/\/start/, (msg) => {
   setTimeout(() => {
     bot.sendMessage(
       msg.chat.id,
-      `What do you wanna do today🤗\n\nTo download tutorial enter name eg. _Modern JavaScript From The Beginning._ \n/random 🧐\n/\help ℹ️\n/donate ❤️`,
+      `What do you wanna do today🤗\n\nTo download tutorial enter name eg. _Modern JavaScript From The Beginning._ \n/steps 👣 \n/random 🧐\n/\help ℹ️\n/donate ❤️`,
       { parse_mode: 'Markdown' }
     );
   }, 1000);
@@ -43,7 +43,8 @@ bot.on('message', (msg) => {
     tutorial !== '/start' &&
     tutorial !== '/help' &&
     tutorial !== '/random' &&
-    tutorial !== '/donate'
+    tutorial !== '/donate' &&
+    tutorial !== '/steps'
   ) {
     // Get Data
     (async () => {
@@ -183,6 +184,18 @@ bot.onText(/\/help/, (msg, match) => {
   bot.sendMessage(
     chatId,
     `Instructions for using Tutorial Downloader ℹ️\n\n/start - start the bot\nTo download tutorial enter name eg. _Modern JavaScript..._ \n/random - get random tutorials\n/donate - donate to the bot\n/help - learn how the bot works`,
+    {
+      parse_mode: 'Markdown',
+    }
+  );
+});
+
+// Get Steps to download course
+bot.onText(/\/steps/, (msg, match) => {
+  let chatId = msg.chat.id;
+  bot.sendMessage(
+    chatId,
+    `Steps on how to Download a course ℹ️\n\n1. Enter name eg. _Modern JavaScript..._ \n2. Click the download link to get the torrent file\n3. Extract the zip file and open the torrent file to start downloading`,
     {
       parse_mode: 'Markdown',
     }
