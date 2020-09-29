@@ -3,7 +3,6 @@ const cheerio = require('cheerio');
 
 // Free Tutorials US
 const freetutorialsus = async (title) => {
-  console.log(title);
   return new Promise((resolve, reject) => {
     const newTitle = title.replace(/\s+/g, '+');
     const url = `https://www.freetutorialsus.com/?s=${newTitle}`;

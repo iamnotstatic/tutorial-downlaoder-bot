@@ -195,7 +195,7 @@ bot.onText(/\/steps/, (msg, match) => {
   let chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Steps on how to Download a course ℹ️\n\n1. Enter name eg. _Modern JavaScript..._ \n2. Click the download link to get the torrent file\n3. Extract the zip file and open the torrent file to start downloading`,
+    `Steps on how to Download a course ℹ️\n\n1. Enter name eg. _Modern JavaScript..._ \n2. Click the download link to get the torrent file\n3. Use winRAR to extract the zip file and open the torrent file to start downloading`,
     {
       parse_mode: 'Markdown',
     }
