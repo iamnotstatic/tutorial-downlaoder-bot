@@ -28,7 +28,7 @@ bot.onText(/\/start/, (msg) => {
   setTimeout(() => {
     bot.sendMessage(
       msg.chat.id,
-      `What do you wanna do today🤗\n\nTo download tutorial enter name eg. _Javascript._ \n/random 🧐\n/\help ℹ️\n/donate ❤️`,
+      `What do you wanna do today🤗\n\nTo download tutorial enter name eg. _Modern JavaScript From The Beginning._ \n/random 🧐\n/\help ℹ️\n/donate ❤️`,
       { parse_mode: 'Markdown' }
     );
   }, 1000);
@@ -60,7 +60,7 @@ bot.on('message', (msg) => {
         if (res.data.results.length === 0) {
           bot.sendMessage(
             chatId,
-            `Bad request, Please check the title ${tutorial} and try again`
+            `Sorry, but nothing matched your search terms. Please try again with some different keywords.`
           );
         } else {
           new Tutorial({
@@ -73,7 +73,7 @@ bot.on('message', (msg) => {
         console.log(error);
         bot.sendMessage(
           chatId,
-          `Bad request, Please check the title ${tutorial} and try again`
+          `Sorry, but nothing matched your search terms. Please try again with some different keywords.`
         );
       }
     })();
@@ -94,7 +94,7 @@ bot.on('message', (msg) => {
           let shortendURL = res;
 
           const options = {
-            caption: `\nTitle: ${title} \nDate: ${date} \n\n🚀 Download Here: ${shortendURL} \n \nDownload your tutorial with ease here t.me/tuthive_bot`,
+            caption: `\nTitle: ${title} \nDate: ${date} \n\n🚀 Download Here: ${shortendURL} \n \nGet regular udemy courses for free here t.me/tuthive_bot`,
             reply_markup: JSON.stringify({
               inline_keyboard: [[{ text: 'Download', url: shortendURL }]],
             }),
@@ -123,7 +123,7 @@ bot.onText(/\/random/, (msg, match) => {
       if (res.data.results.length === 0) {
         bot.sendMessage(
           chatId,
-          `Bad request, Please check the title ${tutorial} and try again`
+          `Sorry, but nothing matched your search terms. Please try again with some different keywords.`
         );
       } else {
         getDownloadURL(res.data.results);
@@ -132,7 +132,7 @@ bot.onText(/\/random/, (msg, match) => {
       console.log(error);
       bot.sendMessage(
         chatId,
-        `Bad request, Please check the title ${tutorial} and try again`
+        `Sorry, but nothing matched your search terms. Please try again with some different keywords.`
       );
     }
   })();
@@ -170,7 +170,7 @@ bot.onText(/\/donate/, (msg, match) => {
   let chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Music Downloader Bot is free to use meaning you don't ever pay to use the service. However, we accept donations to keep our servers and scrapers working. Feel free to donate to the service with cryptocurrency ❤️ \n\nBitcoin: *${process.env.BITCOIN_ADDRESS}* \n\nEthereum: *${process.env.ETHEREUM_ADDRESS}* \n\nBitcoin Cash: *${process.env.BITCOINCASH_ADDRESS}*`,
+    `Tutorial Downloader Bot is free to use meaning you don't ever pay to use the service. However, we accept donations to keep our servers and scrapers working. Feel free to donate to the service with cryptocurrency ❤️ \n\nBitcoin: *${process.env.BITCOIN_ADDRESS}* \n\nEthereum: *${process.env.ETHEREUM_ADDRESS}* \n\nBitcoin Cash: *${process.env.BITCOINCASH_ADDRESS}*`,
     {
       parse_mode: 'Markdown',
     }
@@ -182,7 +182,7 @@ bot.onText(/\/help/, (msg, match) => {
   let chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Instructions for using Tutorial Downloader ℹ️\n\n/start - start the bot\n*To download tutorial enter name eg. Javascript.* \n/random - get random tutorials\n/donate - donate to the bot\n/help - learn how the bot works`,
+    `Instructions for using Tutorial Downloader ℹ️\n\n/start - start the bot\nTo download tutorial enter name eg. _Modern JavaScript..._ \n/random - get random tutorials\n/donate - donate to the bot\n/help - learn how the bot works`,
     {
       parse_mode: 'Markdown',
     }
