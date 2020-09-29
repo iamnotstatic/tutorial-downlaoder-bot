@@ -95,7 +95,7 @@ bot.on('message', (msg) => {
           let shortendURL = res;
 
           const options = {
-            caption: `\nTitle: ${title} \nDate: ${date} \n\n🚀 Download Here: ${shortendURL} \n \nGet regular udemy courses for free here t.me/tuthive_bot`,
+            caption: `\nTitle: ${title} \nDate: ${date} \n\n🚀 Download Here: ${shortendURL} \n \nGet regular udemy courses for free here https://t.me/tuthive_bot`,
             reply_markup: JSON.stringify({
               inline_keyboard: [[{ text: 'Download', url: shortendURL }]],
             }),
@@ -154,7 +154,7 @@ bot.onText(/\/random/, (msg, match) => {
         let shortendURL = res;
 
         const options = {
-          caption: `\nTitle: ${title} \nDate: ${date} \n\n🚀 Download Here: ${shortendURL} \n \nDownload your tutorial with ease here t.me/tuthive_bot`,
+          caption: `\nTitle: ${title} \nDate: ${date} \n\n🚀 Download Here: ${shortendURL} \n \nDownload your tutorial with ease here https://t.me/tuthive_bot`,
           reply_markup: JSON.stringify({
             inline_keyboard: [[{ text: 'Download', url: shortendURL }]],
           }),
