@@ -195,7 +195,7 @@ bot.onText(/\/steps/, (msg, match) => {
   let chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Steps on how to Download a course ℹ️\n\n1. Enter name eg. _Modern JavaScript..._ \n2. Click the download link to get the torrent file\n3. Use winRAR to extract the zip file and open the torrent file to start downloading`,
+    `Steps on how to Download a free course ℹ️\n\n1. Enter name eg. _Modern JavaScript_, list of tutorial related to your search will be displayed.\n2. Click on the one you would like to download, the link will redirect you to get the torrent file which you can download using uTorrent.\n-Download uTorrent for phone here https://www.utorrent.com/downloads \n-Download uTorrent for PC here https://utorrent.en.softonic.com/download\n3. After successfully downloading, Use winRAR to extract the zip/rar file and start downloading the course.\n\n _Enjoy the course._`,
     {
       parse_mode: 'Markdown',
     }
