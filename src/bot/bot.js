@@ -15,13 +15,14 @@ bot.onText(/\/start/, (msg) => {
         firstname: msg.from.first_name,
         lastname: msg.from.last_name,
         username: msg.from.username,
+        chatId: msg.chat.id,
       }).save();
     }
   })();
 
   bot.sendMessage(
     msg.chat.id,
-    `*Hi ${msg.from.first_name}*, Welcome to Tutorial Downloader Bot! 🤖 \n \n`,
+    `*Hi ${msg.from.first_name}*, Welcome to Get free course Bot! 🤖 \n \n`,
     { parse_mode: 'Markdown' }
   );
 
@@ -38,16 +39,27 @@ bot.onText(/\/start/, (msg) => {
 bot.on('message', (msg) => {
   let tutorial = msg.text;
   let chatId = msg.chat.id;
+  let username = msg.from.username;
 
   if (
     tutorial !== '/start' &&
     tutorial !== '/help' &&
     tutorial !== '/random' &&
     tutorial !== '/donate' &&
-    tutorial !== '/steps'
+    tutorial !== '/steps' &&
+    !tutorial.includes('/broadcast')
   ) {
     // Get Data
     (async () => {
+      const userChatId = await User.findOne({ chatId });
+      if (!userChatId) {
+        const user = await User.findOne({ username });
+        if (user) {
+          user.chatId = chatId;
+          user.save();
+        }
+      }
+
       try {
         // Set Laoding
         bot.sendMessage(chatId, '_Looking for _' + tutorial + '...', {
@@ -81,7 +93,7 @@ bot.on('message', (msg) => {
 
     // Return response to user with information and URL
     const getDownloadURL = (data) => {
-      data.splice(0, 5).forEach((tutorial) => {
+      data.splice(0, 10).forEach((tutorial) => {
         const { title, link, image, date } = tutorial;
 
         // Initial URL
@@ -116,7 +128,7 @@ bot.onText(/\/random/, (msg, match) => {
   (async () => {
     try {
       // Set Laoding
-      bot.sendMessage(chatId, 'fetching random tutorials...', {
+      bot.sendMessage(chatId, 'fetching random courses...', {
         parse_mode: 'Markdown',
       });
       const res = await axios.get(`${process.env.APP_URL}/search?q=`);
@@ -179,11 +191,13 @@ bot.onText(/\/donate/, (msg, match) => {
 });
 
 // Get instructions
-bot.onText(/\/help/, (msg, match) => {
+bot.onText(/\/help/, async (msg, match) => {
+  const users = await User.find({});
+  const tutorials = await Tutorial.find({});
   let chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Instructions for using Tutorial Downloader ℹ️\n\n/start - start the bot\nTo download tutorial enter name eg. _Modern JavaScript..._ \n/random - get random tutorials\n/donate - donate to the bot\n/help - learn how the bot works`,
+    `Instructions for using Get free course Bot ℹ️\n\n/start - start the bot\nTo download tutorial enter name eg. _Modern JavaScript..._ \n/steps - get steps on how to get course \n/random - get random tutorials\n/donate - donate to the bot\n/help - learn how the bot works\n\n👥 Bot Users - ${users.length}\n☁️ Courses Fetched - ${tutorials.length}`,
     {
       parse_mode: 'Markdown',
     }
@@ -195,11 +209,30 @@ bot.onText(/\/steps/, (msg, match) => {
   let chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Steps on how to Download a free course ℹ️\n\n1. Enter name eg. _Modern JavaScript_, list of tutorial related to your search will be displayed.\n2. Click on the one you would like to download, the link will redirect you to get the torrent file which you can download using uTorrent.\n-Download uTorrent for phone here https://www.utorrent.com/downloads \n-Download uTorrent for PC here https://utorrent.en.softonic.com/download\n3. After successfully downloading, Use winRAR to extract the zip/rar file and start downloading the course.\n\n _Enjoy the course._`,
+    `Steps on how to Download a course ℹ️\n\n1. Enter name eg. _Modern JavaScript_, list of tutorial related to your search will be displayed.\n2. Click on the one you would like to download, the link will redirect you to start downloading.\n\nIn some case you have to \n-Download uTorrent for phone here https://www.utorrent.com/downloads \n-Download uTorrent for PC here https://utorrent.en.softonic.com/download\n3. After successfully downloading, Use winRAR to extract the zip/rar file and start downloading the course.\n\n _Enjoy the course._`,
     {
       parse_mode: 'Markdown',
     }
   );
+});
+
+// Broadcast Message
+bot.onText(/\/broadcast (.+)/, async (msg, match) => {
+  const message = match[1];
+  const isAdmin = await User.findOne({ username: msg.from.username });
+
+  if (isAdmin.admin === false) {
+    bot.sendMessage(msg.chat.id, `You can't perform this action`, {
+      parse_mode: 'Markdown',
+    });
+  } else {
+    const users = await User.find({});
+    users.map((user) => {
+      bot.sendMessage(user.chatId, `${message}`, {
+        parse_mode: 'Markdown',
+      });
+    });
+  }
 });
 
 bot.on('polling_error', (err) => console.log(err));

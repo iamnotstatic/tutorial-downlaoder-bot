@@ -16,6 +16,16 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  chatId: {
+    type: Number,
+    required: true,
+    trim: true,
+  },
+  admin: {
+    default: false,
+    type: Boolean,
+    trim: true,
+  },
 });
 
 const User = mongoose.model('User', userSchema);
