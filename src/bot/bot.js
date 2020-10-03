@@ -118,7 +118,7 @@ bot.on('message', (msg) => {
   }
 });
 
-// Process Tutorial Random
+// Process courses Randomly
 bot.onText(/\/random/, (msg, match) => {
   let chatId = msg.chat.id;
 
@@ -126,7 +126,7 @@ bot.onText(/\/random/, (msg, match) => {
   (async () => {
     try {
       // Set Laoding
-      bot.sendMessage(chatId, 'fetching random tutorials...', {
+      bot.sendMessage(chatId, 'fetching random courses...', {
         parse_mode: 'Markdown',
       });
       const res = await axios.get(`${process.env.APP_URL}/search?q=`);
