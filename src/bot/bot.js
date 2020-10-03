@@ -7,22 +7,20 @@ const User = require('../models/user');
 const Tutorial = require('../models/tutorial');
 
 // Welcome Message
-bot.onText(/\/start/, (msg) => {
-  (async () => {
-    let exists = await User.findOne({ username: msg.from.username });
-    if (!exists) {
-      new User({
-        firstname: msg.from.first_name,
-        lastname: msg.from.last_name,
-        username: msg.from.username,
-        chatId: msg.chat.id,
-      }).save();
-    }
-  })();
+bot.onText(/\/start/, async (msg) => {
+  let exists = await User.findOne({ username: msg.from.username });
+  if (!exists) {
+    new User({
+      firstname: msg.from.first_name,
+      lastname: msg.from.last_name,
+      username: msg.from.username,
+      chatId: msg.chat.id,
+    }).save();
+  }
 
   bot.sendMessage(
     msg.chat.id,
-    `*Hi ${msg.from.first_name}*, Welcome to Get free course Bot! 🤖 \n \n`,
+    `*Hi ${msg.from.first_name}*, Welcome to Tutorial Downloader Bot! 🤖 \n \n`,
     { parse_mode: 'Markdown' }
   );
 
@@ -47,7 +45,7 @@ bot.on('message', (msg) => {
     tutorial !== '/random' &&
     tutorial !== '/donate' &&
     tutorial !== '/steps' &&
-    !tutorial.includes('/broadcast')
+    !tutorial.includes('broadcast')
   ) {
     // Get Data
     (async () => {
@@ -128,7 +126,7 @@ bot.onText(/\/random/, (msg, match) => {
   (async () => {
     try {
       // Set Laoding
-      bot.sendMessage(chatId, 'fetching random courses...', {
+      bot.sendMessage(chatId, 'fetching random tutorials...', {
         parse_mode: 'Markdown',
       });
       const res = await axios.get(`${process.env.APP_URL}/search?q=`);
@@ -183,7 +181,7 @@ bot.onText(/\/donate/, (msg, match) => {
   let chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Tutorial Downloader Bot is free to use meaning you don't ever pay to use the service. However, we accept donations to keep our servers and scrapers working. Feel free to donate to the service with cryptocurrency ❤️ \n\nBitcoin: *${process.env.BITCOIN_ADDRESS}* \n\nEthereum: *${process.env.ETHEREUM_ADDRESS}* \n\nBitcoin Cash: *${process.env.BITCOINCASH_ADDRESS}*`,
+    `Get free course Bot is free to use meaning you don't ever pay to use the service. However, we accept donations to keep our servers and scrapers working. Feel free to donate to the service with cryptocurrency ❤️ \n\nBitcoin: *${process.env.BITCOIN_ADDRESS}* \n\nEthereum: *${process.env.ETHEREUM_ADDRESS}* \n\nBitcoin Cash: *${process.env.BITCOINCASH_ADDRESS}*`,
     {
       parse_mode: 'Markdown',
     }
@@ -197,7 +195,7 @@ bot.onText(/\/help/, async (msg, match) => {
   let chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Instructions for using Get free course Bot ℹ️\n\n/start - start the bot\nTo download tutorial enter name eg. _Modern JavaScript..._ \n/steps - get steps on how to get course \n/random - get random tutorials\n/donate - donate to the bot\n/help - learn how the bot works\n\n👥 Bot Users - ${users.length}\n☁️ Courses Fetched - ${tutorials.length}`,
+    `Instructions for using Tutorial Downloader ℹ️\n\n/start - start the bot\nTo download tutorial enter name eg. _Modern JavaScript..._ \n/ - get random tutorials \n/random - get random tutorials\n/donate - donate to the bot\n/help - learn how the bot works\n\n👥 Bot Users - ${users.length}\n☁️ Courses Fetched - ${tutorials.length}`,
     {
       parse_mode: 'Markdown',
     }

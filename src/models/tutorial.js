@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const TutorialSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
 
