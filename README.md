@@ -1,4 +1,4 @@
-# Tutorial Downloader Bot
+# Get Free Course Bot
 
 Get udemy courses for free with ease 🚀🚀.. [https://t.me/tuthive_bot](https://t.me/tuthive_bot)
 
