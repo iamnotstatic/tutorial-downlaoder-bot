@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 app.get('/', function (req, res) {
   res.json({
-    message: 'Welcome to Tutorial Downloader Bot',
+    message: 'Welcome to Get free course Bot',
     link: 'https://t.me/tuthive_bot',
     version: packageInfo.version,
   });

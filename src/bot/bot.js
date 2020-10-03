@@ -20,14 +20,14 @@ bot.onText(/\/start/, async (msg) => {
 
   bot.sendMessage(
     msg.chat.id,
-    `*Hi ${msg.from.first_name}*, Welcome to Tutorial Downloader Bot! 🤖 \n \n`,
+    `*Hi ${msg.from.first_name}*, Welcome to Get free course Bot! 🤖 \n \n`,
     { parse_mode: 'Markdown' }
   );
 
   setTimeout(() => {
     bot.sendMessage(
       msg.chat.id,
-      `What do you wanna do today🤗\n\nTo download tutorial enter name eg. _Modern JavaScript From The Beginning._ \n/steps 👣 \n/random 🧐\n/\help ℹ️\n/donate ❤️`,
+      `What do you wanna do today🤗\n\nTo download course enter name eg. _Modern JavaScript From The Beginning._ \n/steps 👣 \n/random 🧐\n/\help ℹ️\n/donate ❤️`,
       { parse_mode: 'Markdown' }
     );
   }, 1000);
@@ -195,7 +195,7 @@ bot.onText(/\/help/, async (msg, match) => {
   let chatId = msg.chat.id;
   bot.sendMessage(
     chatId,
-    `Instructions for using Tutorial Downloader ℹ️\n\n/start - start the bot\nTo download tutorial enter name eg. _Modern JavaScript..._ \n/ - get random tutorials \n/random - get random tutorials\n/donate - donate to the bot\n/help - learn how the bot works\n\n👥 Bot Users - ${users.length}\n☁️ Courses Fetched - ${tutorials.length}`,
+    `Instructions for using Get free course Bot ℹ️\n\n/start - start the bot\nTo download tutorial enter name eg. _Modern JavaScript..._ \n/steps - how to download course \n/random - get random tutorials\n/donate - donate to the bot\n/help - learn how the bot works\n\n👥 Bot Users - ${users.length}\n☁️ Courses Fetched - ${tutorials.length}`,
     {
       parse_mode: 'Markdown',
     }
